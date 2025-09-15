@@ -54,6 +54,9 @@ if aws cloudformation describe-stacks --stack-name "$STACK_NAME" --region "$REGI
         --region "$REGION" \
         --capabilities CAPABILITY_IAM CAPABILITY_NAMED_IAM \
         --no-cli-pager
+    
+    print_status "Waiting for stack update to complete..."
+    aws cloudformation wait stack-update-complete --stack-name "$STACK_NAME" --region "$REGION" --no-cli-pager
 else
     print_status "Stack does not exist, creating..."
     aws cloudformation create-stack \
@@ -63,11 +66,10 @@ else
         --region "$REGION" \
         --capabilities CAPABILITY_IAM CAPABILITY_NAMED_IAM \
         --no-cli-pager
+    
+    print_status "Waiting for stack creation to complete..."
+    aws cloudformation wait stack-create-complete --stack-name "$STACK_NAME" --region "$REGION" --no-cli-pager
 fi
-
-print_status "Waiting for stack operation to complete..."
-aws cloudformation wait stack-update-complete --stack-name "$STACK_NAME" --region "$REGION" --no-cli-pager 2>/dev/null || \
-aws cloudformation wait stack-create-complete --stack-name "$STACK_NAME" --region "$REGION" --no-cli-pager
 
 if [ $? -eq 0 ]; then
     print_status "Stack operation completed successfully!"
