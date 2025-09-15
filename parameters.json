@@ -1,6 +1,6 @@
 [
   {
     "ParameterKey": "KeyPairName",
-    "ParameterValue": "your-key-pair-name"
+    "ParameterValue": "simple-alb-key"
   }
 ]
