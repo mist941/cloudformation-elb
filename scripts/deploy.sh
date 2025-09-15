@@ -26,7 +26,7 @@ print_error() {
 STACK_NAME=${1:-"simple-alb-stack"}
 TEMPLATE_FILE="templates/elb.yaml"
 PARAMETERS_FILE="parameters.json"
-REGION=${AWS_DEFAULT_REGION:-"us-east-1"}
+REGION=${AWS_DEFAULT_REGION:-"eu-north-1"}
 
 # Check if files exist
 if [ ! -f "$TEMPLATE_FILE" ]; then
