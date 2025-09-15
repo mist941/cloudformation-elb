@@ -159,11 +159,6 @@ Resources:
       HealthCheckTimeoutSeconds: 5
       HealthyThresholdCount: 2
       UnhealthyThresholdCount: 3
-      Targets:
-        - Id: !Ref EC2Instance1
-          Port: 80
-        - Id: !Ref EC2Instance2
-          Port: 80
       Tags:
         - Key: Name
           Value: SimpleALB-TG
