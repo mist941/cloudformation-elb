@@ -24,7 +24,7 @@ print_error() {
 }
 
 STACK_NAME=${1:-"simple-alb-stack"}
-REGION=${AWS_DEFAULT_REGION:-"us-east-1"}
+REGION=${AWS_DEFAULT_REGION:-"eu-north-1"}
 
 print_warning "This will destroy the CloudFormation stack: $STACK_NAME"
 print_warning "Region: $REGION"
@@ -37,7 +37,7 @@ if [[ ! $REPLY =~ ^[Yy][Ee][Ss]$ ]]; then
 fi
 
 # Check if stack exists
-if ! aws cloudformation describe-stacks --stack-name "$STACK_NAME" --region "$REGION" >/dev/null 2>&1; then
+if ! aws cloudformation describe-stacks --stack-name "$STACK_NAME" --region "$REGION" --no-cli-pager >/dev/null 2>&1; then
     print_error "Stack does not exist: $STACK_NAME"
     exit 1
 fi
@@ -46,10 +46,11 @@ print_status "Deleting CloudFormation stack: $STACK_NAME"
 
 aws cloudformation delete-stack \
     --stack-name "$STACK_NAME" \
-    --region "$REGION"
+    --region "$REGION" \
+    --no-cli-pager
 
 print_status "Waiting for stack deletion to complete..."
-aws cloudformation wait stack-delete-complete --stack-name "$STACK_NAME" --region "$REGION"
+aws cloudformation wait stack-delete-complete --stack-name "$STACK_NAME" --region "$REGION" --no-cli-pager
 
 if [ $? -eq 0 ]; then
     print_status "Stack deleted successfully!"

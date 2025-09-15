@@ -45,14 +45,15 @@ print_status "Template: $TEMPLATE_FILE"
 print_status "Parameters: $PARAMETERS_FILE"
 
 # Check if stack exists
-if aws cloudformation describe-stacks --stack-name "$STACK_NAME" --region "$REGION" >/dev/null 2>&1; then
+if aws cloudformation describe-stacks --stack-name "$STACK_NAME" --region "$REGION" --no-cli-pager >/dev/null 2>&1; then
     print_status "Stack exists, updating..."
     aws cloudformation update-stack \
         --stack-name "$STACK_NAME" \
         --template-body "file://$TEMPLATE_FILE" \
         --parameters "file://$PARAMETERS_FILE" \
         --region "$REGION" \
-        --capabilities CAPABILITY_IAM CAPABILITY_NAMED_IAM
+        --capabilities CAPABILITY_IAM CAPABILITY_NAMED_IAM \
+        --no-cli-pager
 else
     print_status "Stack does not exist, creating..."
     aws cloudformation create-stack \
@@ -60,12 +61,13 @@ else
         --template-body "file://$TEMPLATE_FILE" \
         --parameters "file://$PARAMETERS_FILE" \
         --region "$REGION" \
-        --capabilities CAPABILITY_IAM CAPABILITY_NAMED_IAM
+        --capabilities CAPABILITY_IAM CAPABILITY_NAMED_IAM \
+        --no-cli-pager
 fi
 
 print_status "Waiting for stack operation to complete..."
-aws cloudformation wait stack-update-complete --stack-name "$STACK_NAME" --region "$REGION" 2>/dev/null || \
-aws cloudformation wait stack-create-complete --stack-name "$STACK_NAME" --region "$REGION"
+aws cloudformation wait stack-update-complete --stack-name "$STACK_NAME" --region "$REGION" --no-cli-pager 2>/dev/null || \
+aws cloudformation wait stack-create-complete --stack-name "$STACK_NAME" --region "$REGION" --no-cli-pager
 
 if [ $? -eq 0 ]; then
     print_status "Stack operation completed successfully!"
@@ -76,7 +78,8 @@ if [ $? -eq 0 ]; then
         --stack-name "$STACK_NAME" \
         --region "$REGION" \
         --query 'Stacks[0].Outputs' \
-        --output table
+        --output table \
+        --no-cli-pager
 else
     print_error "Stack operation failed!"
     exit 1
