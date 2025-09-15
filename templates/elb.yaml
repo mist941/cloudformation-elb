@@ -33,9 +33,6 @@ Resources:
     Properties:
       InternetGatewayId: !Ref InternetGateway
       VpcId: !Ref VPC
-      Tags:
-        - Key: ManagedBy
-          Value: CloudFormation
 
   PublicSubnet1:
     Type: AWS::EC2::Subnet
@@ -80,27 +77,18 @@ Resources:
       RouteTableId: !Ref RouteTable
       DestinationCidrBlock: 0.0.0.0/0
       GatewayId: !Ref InternetGateway
-      Tags:
-        - Key: ManagedBy
-          Value: CloudFormation
 
   PublicSubnet1RouteTableAssociation:
     Type: AWS::EC2::SubnetRouteTableAssociation
     Properties:
       RouteTableId: !Ref RouteTable
       SubnetId: !Ref PublicSubnet1
-      Tags:
-        - Key: ManagedBy
-          Value: CloudFormation
 
   PublicSubnet2RouteTableAssociation:
     Type: AWS::EC2::SubnetRouteTableAssociation
     Properties:
       RouteTableId: !Ref RouteTable
       SubnetId: !Ref PublicSubnet2
-      Tags:
-        - Key: ManagedBy
-          Value: CloudFormation
 
   ALBSecurityGroup:
     Type: AWS::EC2::SecurityGroup
