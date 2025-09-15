@@ -1,6 +1,5 @@
 #!/bin/bash
 
-# Simple CloudFormation stack destruction script
 # Usage: ./destroy.sh [stack-name]
 
 set -e

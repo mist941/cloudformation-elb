@@ -1,6 +1,5 @@
 #!/bin/bash
 
-# Simple CloudFormation deployment script
 # Usage: ./deploy.sh [stack-name]
 
 set -e
