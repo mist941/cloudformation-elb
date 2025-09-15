@@ -182,7 +182,7 @@ Resources:
     Type: AWS::EC2::Instance
     Properties:
       ImageId: ami-0a716d3f3b16d290c
-      InstanceType: t2.micro
+      InstanceType: t3.micro
       KeyName: !Ref KeyPairName
       SecurityGroupIds:
         - !Ref EC2SecurityGroup
@@ -205,7 +205,7 @@ Resources:
     Type: AWS::EC2::Instance
     Properties:
       ImageId: ami-0a716d3f3b16d290c
-      InstanceType: t2.micro
+      InstanceType: t3.micro
       KeyName: !Ref KeyPairName
       SecurityGroupIds:
         - !Ref EC2SecurityGroup
