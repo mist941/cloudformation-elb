@@ -1,0 +1,32 @@
+# CloudFormation
+*.swp
+*.swo
+*~
+
+# AWS CLI
+.aws/
+
+# IDE
+.vscode/
+.idea/
+*.iml
+
+# OS
+.DS_Store
+Thumbs.db
+
+# Logs
+*.log
+
+# Temporary files
+*.tmp
+*.temp
+
+# Environment specific
+.env
+.env.local
+.env.*.local
+
+# Backup files
+*.bak
+*.backup

@@ -1,0 +1,6 @@
+[
+  {
+    "ParameterKey": "KeyPairName",
+    "ParameterValue": "your-key-pair-name"
+  }
+]
