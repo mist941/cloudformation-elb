@@ -1,20 +1,3 @@
-# Simple CloudFormation ALB Project Makefile
-
-.PHONY: help validate deploy destroy clean
-
-# Default target
-help:
-	@echo "Available targets:"
-	@echo "  validate  - Validate CloudFormation template"
-	@echo "  deploy    - Deploy the stack"
-	@echo "  destroy   - Destroy the stack"
-	@echo "  clean     - Clean temporary files"
-
-# Validate template
-validate:
-	@echo "Validating CloudFormation template..."
-	@aws cloudformation validate-template --template-body file://templates/elb.yaml
-
 # Deploy stack
 deploy:
 	@echo "Deploying CloudFormation stack..."
